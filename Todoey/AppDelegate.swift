@@ -1,9 +1,8 @@
 //
 //  AppDelegate.swift
-//  Destini
+//  Todoey
 //
-//  Created by Philipp Muellauer on 01/09/2015.
-//  Copyright (c) 2015 London App Brewery. All rights reserved.
+//  Created by Yarden Katz on 19/04/2021.
 //
 
 import UIKit
