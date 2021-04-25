@@ -11,6 +11,8 @@ import ChameleonFramework
 
 class TodoListViewController: SwipeTableViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var todoItems: Results<Item>?
     let realm = try! Realm()
     var selectedCategory: Category? {
@@ -24,6 +26,27 @@ class TodoListViewController: SwipeTableViewController {
         
         loadItems()
         tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+      
+        if let colorHex = selectedCategory?.hexColor {
+            title = selectedCategory!.name
+            if let color = UIColor(hexString: colorHex),
+               let navBar = navigationController?.navigationBar {
+                let app = UINavigationBarAppearance()
+                app.backgroundColor = color
+                navBar.scrollEdgeAppearance = app
+
+                let textColor = ContrastColorOf(color, returnFlat: true)
+                navBar.tintColor = textColor
+                navBar.largeTitleTextAttributes = [.foregroundColor : textColor]
+                navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : textColor]
+
+                searchBar.barTintColor = color
+            }
+        }
     }
 
     //MARK: - Tableview Datasource Method
